@@ -1,12 +1,23 @@
 <template>
   <div id="app">
+    <Header></Header>
     <router-view/>
+    <User></User>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
+import User from '@/components/User'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    User,
+    Header,
+    Footer,
+  }
 }
 </script>
 
