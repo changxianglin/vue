@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+  </head>
+  <body>
+    <div id = "app">
+      <div v-for = "(item, index) of list" :key = 'item.id'>
+        {{item.text}} --- {{index}}
+      </div>
+    </div>
+    <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        list: [
+          {
+          id: '01010101',
+          text: 'hello',
+        },
+        {
+          id: '01010102',
+          text: 'zhang',
+        },
+        {
+          id: '01010103',
+          text: 'san',
+        }
+      ]
+      }
+    })
+    </script>
+  </body>
+</html>
