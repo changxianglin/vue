@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>template</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+  </head>
+  <body>
+    <div id = "app">
+      <div>
+        {{name + 'san'}}
+      </div>
+      <div v-text = "name + 'san' ">
+
+      </div>
+      <div v-html = "name + 'san' ">
+
+      </div>
+    </div>
+    <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        name: 'zhang',
+      }
+    })
+    </script>
+  </body>
+</html>
