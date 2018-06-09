@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>vue</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+  </head>
+  <body>
+    <div id = "app">
+      <div v-if = "show === 'a' ">
+        This is hello world!
+      </div>
+      <div v-else-if="show === 'b' ">
+        This is haha!!
+      </div>
+      <div v-else>
+        Bye World!!
+      </div>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          show: "a",
+        }
+      })
+    </script>
+  </body>
+</html>
