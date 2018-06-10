@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id = "app">
+      <child content = "zhang"></child>
+      <child content = 'san'></child>
+    </div>
+    <script>
+      Vue.prototype.bus = new Vue()
+
+      Vue.component('child', {
+        data: function() {
+          return {
+            selfContent: this.content,
+          }
+        },
+        props: {
+          content: String,
+        },
+        template: '<div @click = "handleClick">{{selfContent}}</div>',
+        methods: {
+          handleClick: function() {
+            this.bus.$emit('change', this.selfContent)
+          }
+        },
+        mounted: function() {
+          var this_ = this
+          this.bus.$on('change', function(msg) {
+            this_.selfContent = msg
+          })
+        }
+      })
+      var vm = new Vue({
+        el: '#app',
+      })
+    </script>
+  </body>
+</html>
