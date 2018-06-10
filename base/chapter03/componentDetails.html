@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>vue</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+  </head>
+  <body>
+    <div id = "app">
+      <table>
+        <tbody>
+          <tr is = 'row'></tr>
+          <tr is = 'row'></tr>
+          <tr is = 'row'></tr>
+        </tbody>
+      </table>
+    </div>
+    <script>
+      Vue.component('row', {
+        template: '<tr><td>this is a row</tr></td>'
+      })
+      var vm = new Vue({
+        el: '#app',
+      })
+    </script>
+  </body>
+</html>
