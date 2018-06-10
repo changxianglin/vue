@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <style media="screen">
+      .v-enter,
+      .v-leave-to{
+        opacity: 0;
+      }
+      .v-enter-active,
+      .v-leave-active {
+        transition: opacity 1s;
+      }
+    </style>
+  </head>
+  <body>
+    <div id = "app">
+      <transition>
+      <div v-if = 'show'>
+        hello world
+      </div>
+      </transition>
+      <button @click = 'handleClick'>change</button>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          show: true,
+        },
+        methods: {
+          handleClick: function() {
+            this.show = !this.show
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

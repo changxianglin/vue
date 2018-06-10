@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <style media="screen">
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 3s;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id = "app">
+      <transition  type = "animation" :duration = "{enter: 5000, leave: 10000}" name = 'fade' appear
+      enter-active-class = "animated swing fade-enter-active"
+      leave-active-class = "animated shake fade-leave-active"
+      appear-active-class = 'animated swing'>
+      <div v-if = 'show'>
+        hello world
+      </div>
+      </transition>
+      <button @click = 'handleClick'>change</button>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          show: true,
+        },
+        methods: {
+          handleClick: function() {
+            this.show = !this.show
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
