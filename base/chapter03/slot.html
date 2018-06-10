@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id = "app">
+      <child>
+        <div class="header" slot = 'header'>
+          header
+        </div>
+        <div class="footer" slot = 'footer'>
+          footer
+        </div>
+      </child>
+    </div>
+    <script>
+      Vue.prototype.bus = new Vue()
+
+      Vue.component('child', {
+        template: `<div>
+                    <slot name = 'header'></slot>
+                    <p>hello</p>
+                    <slot name = 'footer'></slot>
+                  </div>`,
+      })
+      var vm = new Vue({
+        el: '#app',
+      })
+    </script>
+  </body>
+</html>
