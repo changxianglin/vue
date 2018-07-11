@@ -1,11 +1,15 @@
 <template>
   <div class="hello">
     <div>{{this.msg}}</div>
+    <div @click = "alertMsg">alert</div>
+    <div @click = "ajax">Ajax</div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import Swal from 'sweetalert2'
+
 export default {
   name: 'HelloWorld',
   data () {
@@ -26,6 +30,28 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
+    },
+    alertMsg (data) {
+      Swal({
+        html: data,
+        showConfirmButton: false,
+      })
+      // Swal({
+      //   html: "<form><input type='text'><br><input type='text'></form>",
+      // })
+      // Swal({
+      //   title: 'Oops...',
+      //   text: 'Something went wrong!',
+      //   showConfirmButton: false,
+      // })
+    },
+    ajax () {
+      axios.get('https://www.easy-mock.com/mock/5aead18d44f4206ef1c42cfd/example/sweetalert2').then(res => {
+          console.log(res.data.data.url)
+        let content = res.data.data.url
+        this.alertMsg(content)
+        // this.alertMsg()
+      })
     }
   },
   mounted () {
