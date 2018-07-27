@@ -9,12 +9,11 @@
 <script>
 import axios from 'axios'
 import Swal from 'sweetalert2'
-
 export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
     }
   },
   methods: {
@@ -52,6 +51,9 @@ export default {
         this.alertMsg(content)
         // this.alertMsg()
       })
+    },
+    handleClick () {
+    console.log('father')
     }
   },
   mounted () {
