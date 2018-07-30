@@ -8,14 +8,13 @@
       <div>
         <router-view></router-view>
       </div>
-      <router-link to = "/cart">跳转到购物车页面</router-link>
-      <button @click = "jump">button - 跳转到购物车页面</button>
+      <router-link :to = "{name: 'cart', params: {cartId: 123}}">跳转到购物车页面</router-link>
     </div>
 </template>
 
 <script>
     export default {
-        name: "GoodsList.vue",
+
       methods: {
           jump () {
             this.$router.push({path: '/cart?goodsId=321'})

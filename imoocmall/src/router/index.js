@@ -12,24 +12,16 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/goods',
+      path: '/',
       name: 'GoodsList',
-      component: GoodsList,
-      children: [
-        {
-          path: 'title',
-          name: 'title',
-          component: Title,
-        },
-        {
-          path: 'image',
-          name: 'image',
-          component: Image,
-        }
-      ]
+      components: {
+        default: GoodsList,
+        title: Title,
+        image: Image,
+      },
     },
     {
-      path: '/cart',
+      path: '/cart/:cartId',
       name: 'cart',
       component: Cart,
     }
