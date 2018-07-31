@@ -17,6 +17,7 @@
     <a href="javascript:;" class="btn btn-primary" v-on:click="get">get请求</a>
     <a href="javascript:;" class="btn btn-primary" @click = "post">post请求</a>
     <a href="javascript:;" class="btn btn-primary" @click = "jsonp">jsonp请求</a>
+    <a href="javascript:;" class="btn btn-primary" @click = "http">http请求</a>
     <div>{{msg}}</div>
   </div>
   <script>
@@ -24,6 +25,18 @@
       el: "#app",
       data: {
           msg: ''
+      },
+      http: {
+        root: ''
+      },
+      mounted: function () {
+        Vue.http.interceprots.push(function (request, next) {
+          console.log('request init.')
+          next(function (response) {
+            console.log('response init.')
+            return response
+          })
+        })
       },
       methods: {
           get: function () {
@@ -53,6 +66,24 @@
         },
         jsonp: function () {
           this.$http.jsonp('任意第三方地址').then(function (res) {
+            this.msg = res.data
+          })
+        },
+        http: function () {
+          this.$http({
+            url: 'package.json',
+            method: 'GET',
+            params: {
+              userId: '103'
+            },
+            headers: {
+              token: '123'
+            },
+            timeout: 50,
+            before: function () {
+              console.log('before init.')
+            }
+          }).then(function (res) {
             this.msg = res.data
           })
         }
