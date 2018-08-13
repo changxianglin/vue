@@ -24,6 +24,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+  if(req.cookie.userId) {
+    next()
+  } else {
+      if(req.originalUrl ==  '/users/login' || req.originalUrl == '/users/logout' || req.path == '/goods/list') {
+          next()
+      } else {
+          res.json({
+            status: '10001',
+            msg: '当前未登陆',
+            result: ''
+          })
+      }
+  }
+})
+
 app.use('/', index);
 app.use('/users', users);
 app.use('/goods', goods)

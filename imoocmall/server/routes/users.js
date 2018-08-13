@@ -28,7 +28,11 @@ router.post('/login', (req, res, next) => {
         path: '/',
         maxAge: 1000 * 60 * 60
       })
-      req.session.user = doc
+      res.cookie("userName", doc.userName, {
+        path: '/',
+        maxAge: 1000 * 60 * 60
+      })
+      // req.session.user = doc
       res.json({
         status: '0',
         msg: '',
@@ -52,6 +56,22 @@ res.json({
   msg: '',
   result: ''
 })
+})
+
+router.get('/checkLogin', (req, res, next) => {
+  if(req.cookies.userId) {
+    res.json({
+      status: '0',
+      msg: '',
+      result: req.cookies.userName || ''
+    })
+  } else {
+    res.json({
+      status: '1',
+      msg: '当前未登陆',
+      result: ''
+    })
+}
 })
 
 module.exports = router;
