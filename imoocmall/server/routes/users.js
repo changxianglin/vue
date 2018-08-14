@@ -74,4 +74,23 @@ router.get('/checkLogin', (req, res, next) => {
 }
 })
 
+// 查询当前购物车数据
+router.get('/cartList', (req, res, next) => {
+  var userId = req.cookies.userId
+  User.findOne({userId: userId}, (err, doc) => {
+    if(err) {
+      res.json({
+        status: '1',
+        msg: err.msg,
+        result: ''
+      })
+    } else {
+        if(doc) {
+          status: '0',
+          msg: ""
+          result: doc.cartList
+  }
+})
+})
+
 module.exports = router;
