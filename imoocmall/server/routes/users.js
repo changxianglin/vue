@@ -123,4 +123,28 @@ router.post('/cart/del', (req, res, next) => {
 })
   }
 })
+
+router.post('/cartEdit', (req, res, next) => {
+  var userId = req.cookies.userId
+  var productId = req.body.productId
+  var productNum = req.body.productNum
+
+  User.update({"userId": userId, "cartList.productId": productId}, {
+    "cartList.$.productNum": productNum
+}, (err, doc) => {
+    if(err) {
+      res.json({
+        "status": '1',
+        msg: err.message,
+        result: ''
+      })
+    } else {
+      res.json({
+      status: '0',
+      msg: '',
+      result: 'suc'
+  })
+  }
+})
+})
 module.exports = router;
