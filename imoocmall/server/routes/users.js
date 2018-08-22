@@ -87,10 +87,10 @@ router.get('/cartList', (req, res, next) => {
     } else {
         if(doc) {
           status: '0',
-          msg: ""
+          msg: "",
           result: doc.cartList
-  }
-})
+    }
+  })
 })
 
 // 购物车删除
@@ -148,7 +148,7 @@ router.post('/cartEdit', (req, res, next) => {
 })
 })
 
-router.post("/editCheckAll", (req, res, next) =>｛
+router.post("/editCheckAll", (req, res, next) => {
   var userId = req.cookies.userId
   var checkAll = req.body.checkAll ? '1': '0'
   User.findOne({userId: userId}, (err, user) => {
@@ -181,5 +181,102 @@ router.post("/editCheckAll", (req, res, next) =>｛
       }
     }
   })
-｝)
+})
+
+// 查询用户地址
+router.get('/addressList', (req, res, next) => {
+  var userId = req.cookies.userId
+  User.findOne({userId:userId}, (err, doc) => {
+    if(err) {
+      res.json({
+        status: '1',
+        msg: err.message,
+        result: ''
+      })
+    } else {
+      res.json({
+        status: '0',
+        msg: '',
+        result: doc.addressList
+      })
+    }
+  })
+})
+
+//设置默认地址
+router.post('/setDefault', (req, res, next) => {
+  var userId = req.cookies.userId
+  var addressId = req.body.addressId
+  if(!addressId) {
+    res.json({
+      status: '1003',
+      msg: 'addressId is null',
+      result: ''
+    })
+  } else {
+    User.findOne({userId: userId}, (err, doc) => {
+      if(err) {
+        res.json({
+          status: '1',
+          msg: err.message,
+          result: ''
+        })
+      } else {
+        var addressList = doc.addressList
+        addressList.forEach((item) => {
+          if(item.addressId == addressId) {
+            item.isDefault = true
+          } else {
+            item.isDefault = false
+          }
+        })
+
+        doc.save((err1, doc1) => {
+            if(err1) {
+              res.json({
+                status: '1',
+                msg: err.message,
+                result: ''
+              })
+            } else {
+              res.json({
+                status: '0',
+                msg: '',
+                result: ''
+              })
+            }
+        })
+      }
+    })
+  }
+})
+
+//删除地址
+router.post('/delAddress', (req, res, next) => {
+  var userId = req.cookies.userId
+  var addressId = req.body.addressId
+  User.update({
+    userId: userId
+  }, {
+    $pull: {
+      'addressList': {
+        'addressId': addressId
+      }
+    }
+  }, (err, doc) => {
+    if(err) {
+      res.json({
+        status: '1',
+        msg: err.message,
+        result: ''
+      })
+    } else {
+      res.json({
+        status: '0',
+        msg: '',
+        result: ''
+      })
+    }
+  })
+})
 module.exports = router;
