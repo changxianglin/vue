@@ -279,4 +279,67 @@ router.post('/delAddress', (req, res, next) => {
     }
   })
 })
+
+//
+router.post('/payMent', (req, res, next) => {
+  let userId = req.cookies.userId
+  let orderTotal = req.body.orderTotal
+  let addressId = req.body.orderId
+  User.findOne({userId: userId}, (err, doc) => {
+    if(err) {
+      res.json({
+        status: '1',
+        msg: err.message,
+        result: ''
+      })
+    } else {
+      var address = ''
+      var goodsList = []
+       //获取当前的地址信息
+       doc.addressList.forEach((item) => {
+          if(addressId == item.addressId) {
+                address = item
+          }
+       })
+
+      //获取购物车的购买商品
+      doc.cartList.filter((item) => {
+        if(item.checked == '1') {
+          goodsList.push(item)
+
+        }
+      })
+
+      var order = {
+        orderId: '',
+        orderTotal: orderTotal,
+        addressInfo: address,
+        goodsList: goodsList,
+        orderStatus: '1',
+        createDate: ''
+      }
+
+      doc.orderList.push(order)
+
+      doc.save((err1, doc1) => {
+        if(err1) {
+          res.json({
+            status: '1',
+            msg: err1.message,
+            result: ''
+          })
+        } else {
+          res.json({
+            status: '0',
+            msg: '',
+            result: {
+              orderId: order.orderId,
+              orderTotal: order.orderTotal
+            }
+          })
+        }
+      })
+    }
+  })
+})
 module.exports = router;
