@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vuex</title>
+  <script src = "../mode_modules/vue/dist/vue.js"></script>
+  <script src = "../mode_modules/vuex/dist/vuex.min.js"></script>
+</head>
+<body>
+<div id="app">
+  <h2>{{msg}}</h2>
+  <counter></counter>
+</div>
+
+<script>
+  const counter = {
+    template: `
+      <div>{{ count }}</div>
+    `,
+    computed: {
+      count() {
+        return this.$store.state.count
+      }
+    }
+  }
+  const store = new Vuex.Store({
+    state: {
+      count: 0
+    }
+  })
+  new Vue({
+    el: '#app',
+    store,
+    data: {
+      msg: 'Vuex 的使用'
+    },
+    components: {
+      counter
+    }
+  })
+</script>
+</body>
+</html>
