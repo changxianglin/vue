@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vuex - mutations</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <script src="https://unpkg.com/vuex@3.0.1/dist/vuex.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>{{msg}}</h2>
+    <a href="javascript:;" @click = "add">add</a>
+    <counter></counter>
+  </div>
+
+  <script>
+    const counter = {
+      template: `
+      <div>
+      <div>点击次数{{ count }}</div>
+      <div>用户名{{ name }}</div>
+</div>
+      `,
+      computed: {
+        count() {
+          return this.$store.state.count
+        },
+        name() {
+          return this.$store.state.name
+        }
+      }
+    }
+
+    const store = new Vuex.Store({
+      state: {
+        count: 10,
+        name: 'zhangsan'
+      },
+      mutations: {
+        increment(state, num) {
+          state.count = num
+        },
+        updateName(state, username) {
+          state.name = username
+        }
+      }
+    })
+
+    new Vue({
+      el: '#app',
+      store,
+      data: {
+        msg: 'Vuex 的使用'
+      },
+      components: {
+        counter
+      },
+      methods: {
+        add() {
+          this.$store.commit('increment', 100)
+          this.$store.commit('updateName', 'zhangsanlaile')
+        }
+      }
+    })
+  </script>
+</body>
+</html>

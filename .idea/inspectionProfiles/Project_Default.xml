@@ -1,6 +1,10 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
+<<<<<<< HEAD
     <inspection_tool class="UnterminatedStatementJS" enabled="false" level="WARNING" enabled_by_default="false" />
+=======
+    <inspection_tool class="Eslint" enabled="true" level="ERROR" enabled_by_default="true" />
+>>>>>>> 60a5117582b829bf80f7cf6b39b1b32681efc208
   </profile>
 </component>

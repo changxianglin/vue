@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>flex</title>
+    <style media="screen">
+      body {
+        display: flex;
+        flex-flow: column;
+        min-height: 100vh;
+      }
+      .container {
+        flex: 1;
+        display: flex;
+      }
+      footer {
+        height: 40px;
+      }
+      nav, aside {
+        width: 200px;
+        min-width: 200px;
+        max-width: 200px;
+        height: auto;
+      }
+      main {
+        flex: 1;
+      }
+
+      @media (max-width: 1000px) {
+        .aside {
+          display: none;
+        }
+      }
+
+      @media (max-width:　768px) {
+        .container {
+          flex-direction: column;
+        }
+        nav, aside {
+          width: 100%;
+          min-width: 100%;
+          max-width: 100%;
+        }
+        aside {
+          display: block;
+        }
+        main {
+          min-width: 90vh;
+          height: 90vh;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <div class="">
+          <a href="#">link1</a>
+          <a href="#">link2</a>
+          <a href="#">link3</a>
+          <a href="#">link4</a>
+        </div>
+      </nav>
+      <main>
+        <div class="block1">
+          this is block1
+        </div>
+        <div class="block2">
+          this is block2
+        </div>
+      </main>
+      <aside class="">
+        <div class="side1">
+          side1
+        </div>
+        <div class="side2">
+          side2
+        </div>
+      </aside>
+      <footer>
+        copyright C <a href="//www.zhourong.space">zhourong</a>
+      </footer>
+    </div>
+  </body>
+</html>
