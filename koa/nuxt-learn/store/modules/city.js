@@ -1,5 +1,5 @@
 const state = () => ({
-    list: []
+  list: ['a', 'b']
 })
 
 const mutations = {
