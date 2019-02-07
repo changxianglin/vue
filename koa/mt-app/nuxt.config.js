@@ -28,7 +28,9 @@ module.exports = {
   ** Global CSS
   */
   css: [
+    // 'element-ui/lib/theme-chalk/reset.css',
     'element-ui/lib/theme-chalk/index.css'
+    // '~assets/css/main.css'
   ],
 
   /*
@@ -42,19 +44,31 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios'
   ],
+  axios: {
+
+  },
 
   /*
   ** Build configuration
   */
   build: {
     transpile: [/^element-ui/],
-    
+
     /*
     ** You can extend webpack config here
     */
     extend(config, ctx) {
-      
-    }
+      if (ctx.isDev && ctx.isClient) {
+        config.modul.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        })
+      }
+    },
+    cache: true
   }
 }
