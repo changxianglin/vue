@@ -8,7 +8,7 @@
     </el-row>
     <el-row :span="24">
       3
-    </el-row>u
+    </el-row>
   </div>
 </template>
 
