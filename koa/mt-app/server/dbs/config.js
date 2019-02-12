@@ -20,7 +20,7 @@ export default {
     }
   },
   get code() {
-    return () {
+    return () => {
       return Math.random().toString(16).slice(2, 6).toUpperCase()
     }
   },
