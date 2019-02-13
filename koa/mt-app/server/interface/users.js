@@ -4,7 +4,7 @@ import nodeMailer from 'nodemailer'
 import User from '../dbs/models/users'
 import Passport from './utils/passport'
 import Email from '../dbs/config'
-import axios from '../utils/axios'
+import axios from './utils/axios'
 
 let router = new Router({
   prefix: '/users'
@@ -12,12 +12,12 @@ let router = new Router({
 
 let Store = new Redis().client
 
-router.post('/sigup', async (ctx) => {
+router.post('/signup', async (ctx) => {
   const {
     username,
     password,
     email,
-    cocde,
+    code,
   } = ctx.request.body
 
   if(code) {
@@ -65,7 +65,7 @@ router.post('/sigup', async (ctx) => {
       username,
       password,
     })
-    if(res.data && res.data.code ==== 0) {
+    if(res.data && res.data.code === 0) {
       ctx.body = {
         code: 0,
         msg: '注册成功',
@@ -86,24 +86,24 @@ router.post('/sigup', async (ctx) => {
 })
 
 router.post('/signin', async (ctx, next) => {
-  return Passport.authenticate('local', functionl(err, user, info, status) {
-    if(err) {
+  return Passport.authenticate('local', function(err, user, info, status) {
+    if (err) {
       ctx.body = {
         code: -1,
-        msg: err,
+        msg: err
       }
     } else {
-      if(user) {
+      if (user) {
         ctx.body = {
           code: 0,
           msg: '登录成功',
-          user,
+          user
         }
         return ctx.login(user)
       } else {
         ctx.body = {
           code: 1,
-          msg: info,
+          msg: info
         }
       }
     }
@@ -139,10 +139,10 @@ router.post('/verify', async (ctx, next) => {
   }
 
   let mailOptions = {
-    from `"认证邮件"<${Email.smtp.user}>`,
+    from: `"认证邮件" <${Email.smtp.user}>`,
     to: ko.email,
     subject: '《慕课网高仿美团网全栈实战》注册码',
-    html: `您在《慕课网高仿美团网全栈实战》课程中注册, 你的邀请码是${ko.code}`,
+    html: `您在《慕课网高仿美团网全栈实战》课程中注册，您的邀请码是${ko.code}`
   }
 
   await transporter.sendMail(mailOptions, (error, info) => {
